@@ -1,0 +1,12 @@
+name: pathway-azure-openai-confluent-demo
+metadata:
+  template: pathway-azure-openai-confluent-demo@0.0.2-beta
+services:
+  backend:
+    project: ./app/backend
+    host: containerapp
+    language: python
+  frontend:
+    project: ./app/frontend
+    host: containerapp
+    language: python

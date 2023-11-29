@@ -1,0 +1,6 @@
+pathway
+llm_app
+requests
+datetime
+python-dotenv
+kafka

@@ -1,0 +1,72 @@
+[
+    {
+        "feedback_id": "12345",
+        "source": "email",
+        "timestamp": "2023-11-27T10:00:00Z",
+        "rating": 3,
+        "text": "I found the product useful, but the setup process was complicated and frustrating."
+    },
+    {
+        "feedback_id": "12346",
+        "source": "website",
+        "timestamp": "2023-11-26T15:30:00Z",
+        "rating": 5,
+        "text": "Absolutely love this product! It has exceeded my expectations in every way."
+    },
+    {
+        "feedback_id": "12347",
+        "source": "email",
+        "timestamp": "2023-11-25T09:20:00Z",
+        "rating": 2,
+        "text": "The product does not match the description on the website. Quite disappointed."
+    },
+    {
+        "feedback_id": "12348",
+        "source": "social_media",
+        "timestamp": "2023-11-24T12:45:00Z",
+        "rating": 4,
+        "text": "Good quality and works well, but took longer than expected to arrive."
+    },
+    {
+        "feedback_id": "12349",
+        "source": "email",
+        "timestamp": "2023-11-23T17:00:00Z",
+        "rating": 1,
+        "text": "Had a terrible experience with customer service. Not happy with the product either."
+    },
+    {
+        "feedback_id": "12350",
+        "source": "website",
+        "timestamp": "2023-11-22T20:30:00Z",
+        "rating": 4,
+        "text": "Really good product, but I wish there were more color options available."
+    },
+    {
+        "feedback_id": "12351",
+        "source": "phone",
+        "timestamp": "2023-11-21T11:15:00Z",
+        "rating": 3,
+        "text": "The product is okay, but I expected better performance for the price."
+    },
+    {
+        "feedback_id": "12352",
+        "source": "social_media",
+        "timestamp": "2023-11-20T14:05:00Z",
+        "rating": 5,
+        "text": "Fantastic! This product has made my life so much easier. Highly recommend."
+    },
+    {
+        "feedback_id": "12353",
+        "source": "email",
+        "timestamp": "2023-11-19T18:40:00Z",
+        "rating": 2,
+        "text": "The features are decent, but it's not as durable as I expected."
+    },
+    {
+        "feedback_id": "12354",
+        "source": "website",
+        "timestamp": "2023-11-18T16:50:00Z",
+        "rating": 4,
+        "text": "Great value for the price. Works well, but the user manual could be more detailed."
+    }
+]

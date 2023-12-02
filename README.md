@@ -9,6 +9,7 @@ This repository demonstrates how to build real-time generative AI applications u
     - [Implementation](#implementation)
     - [Overview of the Azure services the sample project uses](#overview-of-the-azure-services-the-sample-project-uses)
     - [Azure infrastructure with the main components](#azure-infrastructure-with-the-main-components)
+    - [One click running app demo](#one-click-running-app-demo)
   - [Setup the project](#setup-the-project)
     - [Prerequisites](#prerequisites)
     - [Open in GitHub Codespaces](#open-in-github-codespaces)
@@ -66,6 +67,14 @@ For example, a multinational corporation wants to improve its customer support b
 ### Azure infrastructure with the main components
 
 ![Azure Infrastructure Diagram](/assets/azure-infra-architecture.png)
+
+### One click running app demo
+
+Follow the link to see the running UI app in Azure:
+
+[Customer support and sentiment analysis dashboard](https://frontend.greensmoke-e214d1a7.francecentral.azurecontainerapps.io/)
+
+It builds a real-time dashboard based on an example prompt we provided to analyze the data.
 
 ## Setup the project
 

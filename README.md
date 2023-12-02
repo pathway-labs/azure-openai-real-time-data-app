@@ -55,9 +55,10 @@ To set up the project you need to follow the below steps:
 
 1. Make sure that you have an Azure account with the required settings specified in the [Prerequisites](#prerequisites) section.
 2. Choose one of these environments to open the project:
-    1. GitHub Codespaces.
-    2. VS Code Dev Containers.
+    1. [GitHub Codespaces](#github-codespaces).
+    2. [VS Code Dev Containers](#run-in-dev-container).
     3. [Local environment](#local-environment).
+3. Follow the [deploy from scratch](#deploy-from-scratch) or [deploy with existing Azure resources](#deploy-with-existing-azure-resources) guide.
 
 ### Prerequisites
 
@@ -65,6 +66,24 @@ To set up the project you need to follow the below steps:
 
 - **Azure account**. If you're new to Azure, [get an Azure account for free](https://azure.microsoft.com/free/cognitive-search/) and you'll get some free Azure credits to get started.
 - **Azure subscription with access enabled for the Azure OpenAI service**. You can apply for access to Azure OpenAI by completing the form at https://aka.ms/oai/access.
+
+### GitHub Codespaces
+
+Follow these steps to open the project in a Codespace:
+
+1. Click here to open in GitHub Codespaces
+
+[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=lightgrey&logo=github)](https://codespaces.new/pathway-labs/azure-openai-real-time-data-app)
+
+2. Next -> [deploy from scratch](#deploy-from-scratch) or [deploy with existing Azure resources](#deploy-with-existing-azure-resources).
+
+### Run in Dev Container
+
+1. Click here to open in Dev Container
+
+[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Container&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/pathway-labs/azure-openai-real-time-data-app)
+
+2. Next -> [deploy from scratch](#deploy-from-scratch) or [deploy with existing Azure resources](#deploy-with-existing-azure-resources).
 
 ### Local environment
 
@@ -80,29 +99,19 @@ First, install the required tools:
 
 Then bring down the project code:
 
-1. Clone the repository
-    
-    ```bash
-    git clone https://github.com/pathway-labs/azure-openai-real-time-data-app
-    ```
-    
-2. Navigate to the project folder
-    
-    ```bash
-    cd azure-openai-real-time-data-app
-    ```
-    
-3. Then, follow the [deploying from scratch](#deploying-from-scratch) guide.
+1. Open a terminal.
+2. Run `azd auth login` and log in using your Azure account credentials.
+3. Run `azd init -t https://github.com/pathway-labs/azure-openai-real-time-data-app`. This command will initialize a git repository and you do not need to clone this repository.
+4. When the project starts, the system prompts you to enter a new environment name: `AZURE_ENV_NAME`. Read more [manage environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables). For example, any name like: *pathway* and outputs for infrastructure provisioning are automatically stored as environment variables in an `.env` file, located under `.azure/pathway/.env` in the project folder.
+5. Then, follow the [deploying from scratch](#deploy-from-scratch) guide.
 
-### Deploying from scratch
+### Deploy from scratch
 
 If you don't have any pre-existing Azure services and want to start from a fresh deployment, execute the following commands.
 
 1. Open a terminal.
-2. Run `azd auth login` and log in using your Azure account credentials.
-3. Run `azd up` - This will provision Azure resources and deploy the sample project to those resources. We're using **[Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview?tabs=bicep&WT.mc_id=javascript-0000-cxa)**, a language that simplifies the definition of ARM templates and configuring Azure resources.
-4. When the deployment starts, the system asks you to enter: `AZURE_ENV_NAME`. Provide the name of the environment in-use when the terminal prompts. Read more [manage environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables). For example, any name like: *pathway* and outputs for infrastructure provisioning are automatically stored as environment variables in an `.env` file, located under `.azure/pathway/.env` in the project folder.
-5. You keep `EVENT_HUBS_NAMESPACE_CONNECTION_STRING` and `AZURE_OPENAI_API_KEY` empty. We will assign them later after the first successful deployment.
+2. Run `azd up` - This will provision Azure resources and deploy the sample project to those resources. We're using **[Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview?tabs=bicep&WT.mc_id=javascript-0000-cxa)**, a language that simplifies the definition of ARM templates and configuring Azure resources.
+3. You keep `EVENT_HUBS_NAMESPACE_CONNECTION_STRING` and `AZURE_OPENAI_API_KEY` empty. We will assign them later after the first successful deployment.
 
 ![Deployment step 1](/assets/deployment-step-1.png)
 
@@ -114,7 +123,7 @@ After the application has been successfully deployed you will see URLs for both 
 
 > NOTE: It may take 5-10 minutes for the application to be fully deployed.
 
-6. After the first deployment, we set environment variable values for `EVENT_HUBS_NAMESPACE_CONNECTION_STRING` and `AZURE_OPENAI_API_KEY` by running below commands. See how to retrieve [Azure OpenAI API Key](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython&pivots=programming-language-python#retrieve-key-and-endpoint) and [Event Hubs connection string](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string). You can also manually set these values from the Azure portal and skip Step 7.
+4. After the first deployment, we set environment variable values for `EVENT_HUBS_NAMESPACE_CONNECTION_STRING` and `AZURE_OPENAI_API_KEY` by running below commands. See how to retrieve [Azure OpenAI API Key](https://learn.microsoft.com/en-us/azure/ai-services/openai/quickstart?tabs=command-line%2Cpython&pivots=programming-language-python#retrieve-key-and-endpoint) and [Event Hubs connection string](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string). You can also manually set these values from the Azure portal and skip Step 7.
 
 ```bash
 azd env set AZURE_OPENAI_API_KEY {Azure OpenAI API Key}
@@ -122,8 +131,13 @@ azd env set AZURE_OPENAI_API_KEY {Azure OpenAI API Key}
 azd env set EVENT_HUBS_NAMESPACE_CONNECTION_STRING {Azure Event Hubs Namespace Connection String}
 ```
 
-7. Run `azd deploy` to update these values in the Azure Container App. Pathway LLM App backend uses these environment variables. Other variables will be filled automatically.
+5. Run `azd deploy` to update these values in the Azure Container App. Pathway LLM App backend uses these environment variables. Other variables will be filled automatically.
 
 ![Deployment step 4](/assets/deployment-step-4.png)
 
-8. Follow the generated link in the terminal for the frontend app in the Azure Container app and start to use the app. App ingests data from Azure event hubs. Learn how to send events using [Azure Event Hubs Data Generator](https://learn.microsoft.com/en-us/azure/event-hubs/send-and-receive-events-using-data-generator).
+6. Follow the generated link in the terminal for the frontend app in the Azure Container app and start to use the app. App ingests data from Azure event hubs. Learn how to send events using [Azure Event Hubs Data Generator](https://learn.microsoft.com/en-us/azure/event-hubs/send-and-receive-events-using-data-generator).
+
+![Customer support and sentiment analysis dashboard](/assets/sentiment-analysis-demo.gif)
+
+
+### Deploy with existing Azure resources

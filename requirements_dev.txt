@@ -1,0 +1,9 @@
+streamlit
+python-dotenv
+pandas
+plotly
+pathway
+llm_app
+requests
+datetime
+kafka

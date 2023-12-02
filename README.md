@@ -2,6 +2,24 @@
 
 This repository demonstrates how to build real-time generative AI applications using [Azure Event Hubs](https://learn.microsoft.com/en-us/azure/event-hubs/azure-event-hubs-kafka-overview) + [Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-services/openai-service) + [Pathway](https://pathway.com/)’s [LLM App](https://github.com/pathwaycom/llm-app)+[Streamlit](https://streamlit.io/).
 
+- [Data streaming for real-time enterprise AI apps](#data-streaming-for-real-time-enterprise-ai-apps)
+  - [Motivation](#motivation)
+  - [Example scenario: Customer support and sentiment analysis dashboard](#example-scenario-customer-support-and-sentiment-analysis-dashboard)
+    - [Background](#background)
+    - [Implementation](#implementation)
+    - [Overview of the Azure services the sample project uses](#overview-of-the-azure-services-the-sample-project-uses)
+    - [Azure infrastructure with the main components](#azure-infrastructure-with-the-main-components)
+  - [Setup the project](#setup-the-project)
+    - [Prerequisites](#prerequisites)
+    - [Open in GitHub Codespaces](#open-in-github-codespaces)
+    - [Open in Dev Container](#open-in-dev-container)
+    - [Local environment](#local-environment)
+    - [Run the project locally](#run-the-project-locally)
+    - [Deploy from scratch](#deploy-from-scratch)
+    - [Deploy with existing Azure resources](#deploy-with-existing-azure-resources)
+      - [Existing Azure resource group](#existing-azure-resource-group)
+      - [Existing Azure OpenAI resource](#existing-azure-openai-resource)
+
 ## Motivation
 
 Real-time AI app needs real-time data to respond with the most up-to-date information to user queries or perform quick actions autonomously. To reduce cost and infrastructural complexity, you can build a real-time data pipeline with Azure Event Hubs, Pathway, and Azure OpenAI. This integrated system leverages the strengths of Kafka for robust data processing, LLMs like GPT for advanced text analytics, and Streamlit for user-friendly data visualization. 
@@ -12,7 +30,7 @@ This combination empowers businesses to build and deploy enterprise AI applicati
 
 ### Background
 
-For example, a multinational corporation wants to improve its customer support by analyzing customer feedback and inquiries in real-time. They aim to understand common issues, track customer sentiment, and identify areas for improvement in their products and services. To achieve this, they need a system that can process large streams of data, analyze text for insights, and present these insights in an accessible way.
+For example, a multinational corporation wants to improve its customer support by analyzing customer feedback and inquiries in real-time. They aim to understand common issues, track customer sentiment, and identify areas for improvement in their products and services. To achieve this, they need a system that can process large data streams, analyze text for insights, and present these insights in an accessible way.
 
 ### Implementation
 
@@ -28,13 +46,13 @@ For example, a multinational corporation wants to improve its customer support b
     
     Pathway gains access to the data streams from Azure Event Hubs, it preprocesses, transforms, or joins them and the [LLM App](https://github.com/pathwaycom/llm-app) helps to bring real-time context to the AI App with real-time vector indexing, semantic search, and retrieval capabilities. The text content of the events will be sent to Azure OpenAI embedding APIs via the LLM App to compute the embeddings and vector representations will be indexed. 
     
-    By using the LLM app, the company can gain deep insights from unstructured text data, understanding the sentiment and nuances of customer feedback.
+    Using the LLM app, the company can gain deep insights from unstructured text data, understanding the sentiment and nuances of customer feedback.
     
 4. **Streamlit: Interactive Dashboard for Visualization**
     
     Streamlit is used to create an interactive web dashboard that visualizes the insights derived from customer feedback. This dashboard can show real-time metrics such as overall sentiment trends, and common topics in customer feedback, and even alert the team to emerging issues (See [example](https://github.com/pathwaycom/llm-app/tree/main/examples/pipelines/drive_alert) implementation of alerting to enhance this project).
 
-Here's a brief overview of the Azure services the sampe project uses:
+### Overview of the Azure services the sample project uses
 
 | Service | Purpose |
 | --- | --- |
@@ -45,7 +63,7 @@ Here's a brief overview of the Azure services the sampe project uses:
 | [Azure Log Analytics](https://learn.microsoft.com/azure/log-analytics/?WT.mc_id=javascript-0000-cxa) | Collects and analyzes telemetry and logs for insights into application performance and diagnostics. |
 | [Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/?WT.mc_id=javascript-0000-cxa) | Provides comprehensive monitoring of our applications, infrastructure, and network. |
 
-Azure infrastructure with the main components:
+### Azure infrastructure with the main components
 
 ![Azure Infrastructure Diagram](/assets/azure-infra-architecture.png)
 
@@ -53,21 +71,21 @@ Azure infrastructure with the main components:
 
 To set up the project you need to follow the below steps:
 
-1. Make sure that you have an Azure account with the required settings specified in the [Prerequisites](#prerequisites) section.
+1. You have an Azure account with the required settings specified in the [Prerequisites](#prerequisites) section.
 2. Choose one of these environments to open the project:
-    1. [GitHub Codespaces](#github-codespaces).
-    2. [VS Code Dev Containers](#run-in-dev-container).
+    1. [GitHub Codespaces](#open-in-github-codespaces).
+    2. [VS Code Dev Containers](#open-in-dev-container).
     3. [Local environment](#local-environment).
 3. Follow the [deploy from scratch](#deploy-from-scratch) or [deploy with existing Azure resources](#deploy-with-existing-azure-resources) guide.
 
 ### Prerequisites
 
-**Azure account requirements:** In order to run and deploy the example project, you'll need:
+**Azure account requirements:** To run and deploy the example project, you'll need:
 
 - **Azure account**. If you're new to Azure, [get an Azure account for free](https://azure.microsoft.com/free/cognitive-search/) and you'll get some free Azure credits to get started.
 - **Azure subscription with access enabled for the Azure OpenAI service**. You can apply for access to Azure OpenAI by completing the form at https://aka.ms/oai/access.
 
-### GitHub Codespaces
+### Open in GitHub Codespaces
 
 Follow these steps to open the project in a Codespace:
 
@@ -77,7 +95,7 @@ Follow these steps to open the project in a Codespace:
 
 2. Next -> [deploy from scratch](#deploy-from-scratch) or [deploy with existing Azure resources](#deploy-with-existing-azure-resources).
 
-### Run in Dev Container
+### Open in Dev Container
 
 1. Click here to open in Dev Container
 
@@ -104,6 +122,19 @@ Then bring down the project code:
 3. Run `azd init -t https://github.com/pathway-labs/azure-openai-real-time-data-app`. This command will initialize a git repository and you do not need to clone this repository.
 4. When the project starts, the system prompts you to enter a new environment name: `AZURE_ENV_NAME`. Read more [manage environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables). For example, any name like: *pathway* and outputs for infrastructure provisioning are automatically stored as environment variables in an `.env` file, located under `.azure/pathway/.env` in the project folder.
 5. Then, follow the [deploying from scratch](#deploy-from-scratch) guide.
+
+### Run the project locally
+
+1. Open the project in [GitHub Codespaces](#open-in-github-codespaces), [VS Code Dev Containers](#open-in-dev-container), or [Local environment](#local-environment).
+2. [Deploy from scratch](#deploy-from-scratch) or [deploy with existing Azure resources](#deploy-with-existing-azure-resources).
+3. Copy `.env` file, located under `.azure/<environment name>/.env` folder to a new `.env` file in the project root folder where `README.md` file is.
+4. Install the required packages:
+
+```bash
+pip install --upgrade -r requirements_dev.txt
+```
+5. Navigate to `/app/frontend` folder `cd /app/frontend`.
+6. Run the UI app with the `streamlit run app.py` command. Frontend app uses the backend API deployed in Azure automatically.
 
 ### Deploy from scratch
 
@@ -141,3 +172,19 @@ azd env set EVENT_HUBS_NAMESPACE_CONNECTION_STRING {Azure Event Hubs Namespace C
 
 
 ### Deploy with existing Azure resources
+
+If you already have existing Azure resources, you can re-use those by setting `azd` environment values.
+
+#### Existing Azure resource group
+
+1. Run `azd env set AZURE_RESOURCE_GROUP {Name of existing resource group}`
+2. Run `azd env set AZURE_LOCATION {Location of existing resource group}`
+
+#### Existing Azure OpenAI resource
+
+1. Run `azd env set AZURE_OPENAI_SERVICE {Name of existing OpenAI service}`
+2. Run `azd env set AZURE_OPENAI_RESOURCE_GROUP {Name of existing resource group that OpenAI service is provisioned to}`
+3. Run `azd env set AZURE_OPENAI_CHATGPT_DEPLOYMENT {Name of existing ChatGPT deployment}`. Only needed if your ChatGPT deployment is not the default 'chat'.
+4. Run `azd env set AZURE_OPENAI_EMB_DEPLOYMENT {Name of existing GPT embedding deployment}`. Only needed if your embedding deployment is not the default 'embedding'.
+
+When you run `azd up` after and are prompted to select a value for `openAiResourceGroupLocation`, make sure to select the same location as the existing OpenAI resource group.

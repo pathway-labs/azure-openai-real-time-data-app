@@ -23,7 +23,7 @@ This repository demonstrates how to build real-time generative AI applications u
 
 ## Motivation
 
-Real-time AI app needs real-time data to respond with the most up-to-date information to user queries or perform quick actions autonomously. To reduce cost and infrastructural complexity, you can build a real-time data pipeline with Azure Event Hubs, Pathway, and Azure OpenAI. This integrated system leverages the strengths of Kafka for robust data processing, LLMs like GPT for advanced text analytics, and Streamlit for user-friendly data visualization. 
+Real-time AI app needs real-time data to respond with the most up-to-date information to user queries or perform quick actions autonomously. To reduce cost and infrastructural complexity, you can build a real-time data pipeline with Azure Event Hubs, Pathway, and Azure OpenAI. This integrated system leverages the strengths of Pathway for robust data processing, LLMs like GPT for advanced text analytics, and Streamlit for user-friendly data visualization. 
 
 This combination empowers businesses to build and deploy enterprise AI applications that provide the freshest contextual visual data. 
 
